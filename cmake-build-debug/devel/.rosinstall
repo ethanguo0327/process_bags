@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/ethan/catkin_ws/src/bag_time/cmake-build-debug/devel/setup.sh
