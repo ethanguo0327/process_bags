@@ -3,6 +3,18 @@
 
 CMakeFiles/bag_time_node.dir/src/bag_time_node.cpp.o
  /home/ethan/catkin_ws/src/bag_time/src/bag_time_node.cpp
+ /opt/ros/kinetic/include/geometry_msgs/Accel.h
+ /opt/ros/kinetic/include/geometry_msgs/Point.h
+ /opt/ros/kinetic/include/geometry_msgs/Pose.h
+ /opt/ros/kinetic/include/geometry_msgs/PoseWithCovariance.h
+ /opt/ros/kinetic/include/geometry_msgs/PoseWithCovarianceStamped.h
+ /opt/ros/kinetic/include/geometry_msgs/Quaternion.h
+ /opt/ros/kinetic/include/geometry_msgs/Transform.h
+ /opt/ros/kinetic/include/geometry_msgs/TransformStamped.h
+ /opt/ros/kinetic/include/geometry_msgs/Twist.h
+ /opt/ros/kinetic/include/geometry_msgs/TwistWithCovariance.h
+ /opt/ros/kinetic/include/geometry_msgs/Vector3.h
+ /opt/ros/kinetic/include/nav_msgs/Odometry.h
  /opt/ros/kinetic/include/ros/advertise_options.h
  /opt/ros/kinetic/include/ros/advertise_service_options.h
  /opt/ros/kinetic/include/ros/assert.h
@@ -76,7 +88,9 @@ CMakeFiles/bag_time_node.dir/src/bag_time_node.cpp.o
  /opt/ros/kinetic/include/roslz4/lz4s.h
  /opt/ros/kinetic/include/sensor_msgs/CameraInfo.h
  /opt/ros/kinetic/include/sensor_msgs/Image.h
+ /opt/ros/kinetic/include/sensor_msgs/Imu.h
  /opt/ros/kinetic/include/sensor_msgs/RegionOfInterest.h
  /opt/ros/kinetic/include/std_msgs/Header.h
+ /opt/ros/kinetic/include/tf2_msgs/TFMessage.h
  /opt/ros/kinetic/include/xmlrpcpp/XmlRpcDecl.h
  /opt/ros/kinetic/include/xmlrpcpp/XmlRpcValue.h
