@@ -2,41 +2,41 @@
 <project version="4">
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
     <generated>
-      <config projectName="bag_time" targetName="rosgraph_msgs_generate_messages_cpp" />
-      <config projectName="bag_time" targetName="gtest_main" />
-      <config projectName="bag_time" targetName="topic_tools_generate_messages_eus" />
-      <config projectName="bag_time" targetName="gmock" />
-      <config projectName="bag_time" targetName="std_srvs_generate_messages_py" />
-      <config projectName="bag_time" targetName="doxygen" />
-      <config projectName="bag_time" targetName="roscpp_generate_messages_py" />
-      <config projectName="bag_time" targetName="std_srvs_generate_messages_lisp" />
-      <config projectName="bag_time" targetName="roscpp_generate_messages_eus" />
-      <config projectName="bag_time" targetName="std_msgs_generate_messages_cpp" />
-      <config projectName="bag_time" targetName="std_srvs_generate_messages_eus" />
-      <config projectName="bag_time" targetName="std_msgs_generate_messages_py" />
-      <config projectName="bag_time" targetName="std_msgs_generate_messages_lisp" />
-      <config projectName="bag_time" targetName="run_tests" />
-      <config projectName="bag_time" targetName="std_msgs_generate_messages_nodejs" />
-      <config projectName="bag_time" targetName="clean_test_results" />
       <config projectName="bag_time" targetName="topic_tools_generate_messages_cpp" />
-      <config projectName="bag_time" targetName="rosgraph_msgs_generate_messages_py" />
-      <config projectName="bag_time" targetName="std_srvs_generate_messages_cpp" />
-      <config projectName="bag_time" targetName="roscpp_generate_messages_cpp" />
-      <config projectName="bag_time" targetName="rosgraph_msgs_generate_messages_lisp" />
-      <config projectName="bag_time" targetName="gmock_main" />
-      <config projectName="bag_time" targetName="rosgraph_msgs_generate_messages_eus" />
-      <config projectName="bag_time" targetName="gtest" />
-      <config projectName="bag_time" targetName="bag_time_node" />
-      <config projectName="bag_time" targetName="tests" />
-      <config projectName="bag_time" targetName="roscpp_generate_messages_nodejs" />
-      <config projectName="bag_time" targetName="topic_tools_generate_messages_py" />
-      <config projectName="bag_time" targetName="rosgraph_msgs_generate_messages_nodejs" />
       <config projectName="bag_time" targetName="topic_tools_generate_messages_lisp" />
-      <config projectName="bag_time" targetName="download_extra_data" />
-      <config projectName="bag_time" targetName="std_srvs_generate_messages_nodejs" />
-      <config projectName="bag_time" targetName="topic_tools_generate_messages_nodejs" />
-      <config projectName="bag_time" targetName="roscpp_generate_messages_lisp" />
+      <config projectName="bag_time" targetName="std_msgs_generate_messages_lisp" />
       <config projectName="bag_time" targetName="std_msgs_generate_messages_eus" />
+      <config projectName="bag_time" targetName="rosgraph_msgs_generate_messages_nodejs" />
+      <config projectName="bag_time" targetName="roscpp_generate_messages_cpp" />
+      <config projectName="bag_time" targetName="std_msgs_generate_messages_py" />
+      <config projectName="bag_time" targetName="std_srvs_generate_messages_py" />
+      <config projectName="bag_time" targetName="std_srvs_generate_messages_eus" />
+      <config projectName="bag_time" targetName="topic_tools_generate_messages_nodejs" />
+      <config projectName="bag_time" targetName="roscpp_generate_messages_py" />
+      <config projectName="bag_time" targetName="std_srvs_generate_messages_nodejs" />
+      <config projectName="bag_time" targetName="gtest_main" />
+      <config projectName="bag_time" targetName="tests" />
+      <config projectName="bag_time" targetName="rosgraph_msgs_generate_messages_lisp" />
+      <config projectName="bag_time" targetName="download_extra_data" />
+      <config projectName="bag_time" targetName="gmock_main" />
+      <config projectName="bag_time" targetName="std_msgs_generate_messages_nodejs" />
+      <config projectName="bag_time" targetName="topic_tools_generate_messages_py" />
+      <config projectName="bag_time" targetName="bag_time_node" />
+      <config projectName="bag_time" targetName="rosgraph_msgs_generate_messages_cpp" />
+      <config projectName="bag_time" targetName="run_tests" />
+      <config projectName="bag_time" targetName="clean_test_results" />
+      <config projectName="bag_time" targetName="topic_tools_generate_messages_eus" />
+      <config projectName="bag_time" targetName="roscpp_generate_messages_lisp" />
+      <config projectName="bag_time" targetName="doxygen" />
+      <config projectName="bag_time" targetName="std_msgs_generate_messages_cpp" />
+      <config projectName="bag_time" targetName="rosgraph_msgs_generate_messages_py" />
+      <config projectName="bag_time" targetName="roscpp_generate_messages_eus" />
+      <config projectName="bag_time" targetName="gtest" />
+      <config projectName="bag_time" targetName="std_srvs_generate_messages_cpp" />
+      <config projectName="bag_time" targetName="roscpp_generate_messages_nodejs" />
+      <config projectName="bag_time" targetName="std_srvs_generate_messages_lisp" />
+      <config projectName="bag_time" targetName="gmock" />
+      <config projectName="bag_time" targetName="rosgraph_msgs_generate_messages_eus" />
     </generated>
   </component>
   <component name="CMakeSettings">
@@ -47,13 +47,7 @@
   <component name="ChangeListManager">
     <list default="true" id="85fc3990-f60b-4608-bce7-85eb185bfa65" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile2" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile2" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/bag_time_node.dir/CXX.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/bag_time_node.dir/CXX.includecache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/bag_time_node.dir/depend.internal" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/bag_time_node.dir/depend.internal" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/bag_time_node.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/bag_time_node.dir/depend.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/bag_time_node.dir/src/bag_time_node.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/bag_time_node.dir/src/bag_time_node.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/catkin_generated/setup_cached.sh" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/catkin_generated/setup_cached.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/bag_time_node.dir/src/bag_time_node.cpp.o" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/devel/lib/bag_time/bag_time_node" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/devel/lib/bag_time/bag_time_node" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/bag_time_node.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/bag_time_node.cpp" afterDir="false" />
     </list>
@@ -73,17 +67,26 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/bag_time_node.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="229">
-              <caret line="106" column="14" selection-start-line="106" selection-start-column="14" selection-end-line="106" selection-end-column="14" />
-              <folding>
-                <element signature="e#76#96#0" expanded="true" />
-                <element signature="e#475#503#0" expanded="true" />
-                <marker date="1563103195585" expanded="true" signature="1780:1846" ph="..." />
-                <marker date="1563103195585" expanded="false" signature="2615:2689" ph="..." />
-                <marker date="1563103195585" expanded="false" signature="3032:3106" ph="..." />
-                <marker date="1563103195585" expanded="false" signature="3354:3621" ph="..." />
-                <marker date="1563103195585" expanded="false" signature="3622:3748" ph="..." />
-              </folding>
+            <state relative-caret-position="493">
+              <caret line="188" column="13" lean-forward="true" selection-start-line="188" selection-start-column="13" selection-end-line="188" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file:///opt/ros/kinetic/include/std_msgs/Header.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="243">
+              <caret line="43" column="14" selection-start-line="43" selection-start-column="14" selection-end-line="43" selection-end-column="14" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file:///opt/ros/kinetic/include/rosbag/bag.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="243">
+              <caret line="334" column="10" selection-start-line="334" selection-start-column="10" selection-end-line="334" selection-end-column="10" />
             </state>
           </provider>
         </entry>
@@ -91,8 +94,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file:///opt/ros/kinetic/include/ros/time.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="97">
-              <caret line="179" column="21" selection-start-line="179" selection-start-column="21" selection-end-line="179" selection-end-column="21" />
+            <state relative-caret-position="221">
+              <caret line="152" column="11" selection-start-line="152" selection-start-column="11" selection-end-line="152" selection-end-column="11" />
             </state>
           </provider>
         </entry>
@@ -118,8 +121,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file:///usr/include/boost/smart_ptr/shared_ptr.hpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="201">
-              <caret line="647" selection-start-line="647" selection-end-line="647" />
+            <state relative-caret-position="221">
+              <caret line="645" column="64" selection-start-line="645" selection-start-column="64" selection-end-line="645" selection-end-column="64" />
             </state>
           </provider>
         </entry>
@@ -431,7 +434,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="26060000" />
+    <option name="totallyTimeSpent" value="30662000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="-4" width="1855" height="1084" extended-state="6" />
@@ -442,7 +445,7 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.1328452" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.27092052" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.2834728" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -450,7 +453,7 @@
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="CMake" order="9" weight="0.19037656" />
-      <window_info anchor="bottom" id="Terminal" order="10" weight="0.13179916" />
+      <window_info anchor="bottom" id="Terminal" order="10" weight="0.22071129" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="bottom" id="Messages" order="12" weight="0.3294979" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -484,33 +487,38 @@
         </state>
       </provider>
     </entry>
-    <entry file="file:///usr/include/boost/smart_ptr/shared_ptr.hpp">
+    <entry file="file:///opt/ros/kinetic/include/ros/time.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="201">
-          <caret line="647" selection-start-line="647" selection-end-line="647" />
+        <state relative-caret-position="221">
+          <caret line="152" column="11" selection-start-line="152" selection-start-column="11" selection-end-line="152" selection-end-column="11" />
         </state>
       </provider>
     </entry>
-    <entry file="file:///opt/ros/kinetic/include/ros/time.h">
+    <entry file="file:///usr/include/boost/smart_ptr/shared_ptr.hpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="97">
-          <caret line="179" column="21" selection-start-line="179" selection-start-column="21" selection-end-line="179" selection-end-column="21" />
+        <state relative-caret-position="221">
+          <caret line="645" column="64" selection-start-line="645" selection-start-column="64" selection-end-line="645" selection-end-column="64" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///opt/ros/kinetic/include/rosbag/bag.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="243">
+          <caret line="334" column="10" selection-start-line="334" selection-start-column="10" selection-end-line="334" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///opt/ros/kinetic/include/std_msgs/Header.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="243">
+          <caret line="43" column="14" selection-start-line="43" selection-start-column="14" selection-end-line="43" selection-end-column="14" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/bag_time_node.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="229">
-          <caret line="106" column="14" selection-start-line="106" selection-start-column="14" selection-end-line="106" selection-end-column="14" />
-          <folding>
-            <element signature="e#76#96#0" expanded="true" />
-            <element signature="e#475#503#0" expanded="true" />
-            <marker date="1563103195585" expanded="true" signature="1780:1846" ph="..." />
-            <marker date="1563103195585" expanded="false" signature="2615:2689" ph="..." />
-            <marker date="1563103195585" expanded="false" signature="3032:3106" ph="..." />
-            <marker date="1563103195585" expanded="false" signature="3354:3621" ph="..." />
-            <marker date="1563103195585" expanded="false" signature="3622:3748" ph="..." />
-          </folding>
+        <state relative-caret-position="493">
+          <caret line="188" column="13" lean-forward="true" selection-start-line="188" selection-start-column="13" selection-end-line="188" selection-end-column="13" />
         </state>
       </provider>
     </entry>

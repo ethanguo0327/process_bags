@@ -47,7 +47,6 @@ int main(int argc, char **argv)
     topics.push_back(std::string("/rslidar_packets"));int rslidarcnt=0;
     //d435 1
     std::vector<std::string> topics2;
-    //topics2.push_back(std::string("/camera/color/camera_info"));
     topics2.push_back(std::string("/device_0/sensor_1/Color_0/image/data"));int d435imgcnt=0;
     topics2.push_back(std::string("/device_0/sensor_2/Accel_0/imu/data"));int d435acccnt=0;
     //d435 2
@@ -59,26 +58,11 @@ int main(int argc, char **argv)
     topics4.push_back(std::string("/device_0/sensor_0/Fisheye_1/image/data"));int fish1imgcnt=0;
     topics4.push_back(std::string("/device_0/sensor_0/Fisheye_1/info/camera_info")); int fish1cmicnt=0;
     topics4.push_back(std::string("/device_0/sensor_0/Accel_0/imu/data"));int t265acccnt=0;
-    //topics4.push_back(std::string("/device_0/sensor_0/Fisheye_1/tf/0"));
     //t265 2
     std::vector<std::string> topics5;
     topics5.push_back(std::string("/device_0/sensor_0/Fisheye_2/image/data"));int fish2imgcnt=0;
     topics5.push_back(std::string("/device_0/sensor_0/Fisheye_2/info/camera_info"));int fish2cmicnt=0;
     topics5.push_back(std::string("/device_0/sensor_0/Gyro_0/imu/data"));int t265gyrcnt=0;
-    //topics5.push_back(std::string("/device_0/sensor_0/Fisheye_2/tf/0"));
-    topics5.push_back(std::string("/device_0/sensor_0/Pose_0/pose/accel/data"));
-    topics5.push_back(std::string("/device_0/sensor_0/Pose_0/pose/twist/data"));
-    topics5.push_back(std::string("/device_0/sensor_0/Pose_0/pose/transform/data"));
-//    //t265 3
-//    std::vector<std::string> topics6;
-//    topics6.push_back(std::string("/device_0/sensor_0/Accel_0/tf/0"));
-//    //t265 4
-//    std::vector<std::string> topics7;
-//    topics7.push_back(std::string("/device_0/sensor_0/Gyro_0/tf/0"));
-    //t265 5
-//    //t265 6
-//    std::vector<std::string> topics9;
-//    topics9.push_back(std::string("/device_0/sensor_0/Pose_0/tf/0"));
 
     cout<<"reading and writing...."<<endl;
     rosbag::View view(bag, rosbag::TopicQuery(topics));
@@ -111,9 +95,7 @@ int main(int argc, char **argv)
         {
             d435imgcnt++;
             sensor_msgs::Image image=*simage;
-            ros::Time enhanced_stamp(98,25462);
-            enhanced_stamp.sec+=simage->header.stamp.sec;
-            enhanced_stamp.nsec=simage->header.stamp.nsec;
+            ros::Time enhanced_stamp(simage->header.stamp.toSec()+98.25462);
             image.header.stamp=enhanced_stamp;
             bag_result.write("/device_0/sensor_1/Color_0/image/data",image.header.stamp,image);
         }
@@ -122,9 +104,7 @@ int main(int argc, char **argv)
         {
             d435acccnt++;
             sensor_msgs::Imu imu=*simu;
-            ros::Time enhanced_stamp(98,25462);
-            enhanced_stamp.sec+=simu->header.stamp.sec;
-            enhanced_stamp.nsec=simu->header.stamp.nsec;
+            ros::Time enhanced_stamp(simu->header.stamp.toSec()+98.25462);
             imu.header.stamp=enhanced_stamp;
             bag_result.write("/device_0/sensor_2/Accel_0/imu/data",imu.header.stamp,imu);
         }
@@ -137,9 +117,7 @@ int main(int argc, char **argv)
         if (sdimage != NULL) {
             d435depthcnt++;
             sensor_msgs::Image depthimg = *sdimage;
-            ros::Time enhanced_stamp(98,25462);
-            enhanced_stamp.sec+=sdimage->header.stamp.sec;
-            enhanced_stamp.nsec=sdimage->header.stamp.nsec;
+            ros::Time enhanced_stamp(sdimage->header.stamp.toSec()+98.25462);
             depthimg.header.stamp=enhanced_stamp;
             bag_result.write("/device_0/sensor_0/Depth_0/image/data",depthimg.header.stamp,depthimg);
         }
@@ -147,9 +125,7 @@ int main(int argc, char **argv)
         if (sgyr != NULL) {
             d435gyrcnt++;
             sensor_msgs::Imu gyro = *sgyr;
-            ros::Time enhanced_stamp(98,25462);
-            enhanced_stamp.sec+=sgyr->header.stamp.sec;
-            enhanced_stamp.nsec=sgyr->header.stamp.nsec;
+            ros::Time enhanced_stamp(sgyr->header.stamp.toSec()+98.25462);
             gyro.header.stamp=enhanced_stamp;
             bag_result.write("/device_0/sensor_2/Gyro_0/imu/data",gyro.header.stamp,gyro);
         }
@@ -162,9 +138,7 @@ int main(int argc, char **argv)
             if (sf1image != NULL) {
                 fish1imgcnt++;
                 sensor_msgs::Image f1img = *sf1image;
-                ros::Time enhanced_stamp(98,25462);
-                enhanced_stamp.sec+=sf1image->header.stamp.sec;
-                enhanced_stamp.nsec=sf1image->header.stamp.nsec;
+                ros::Time enhanced_stamp(sf1image->header.stamp.toSec()+98.25462);
                 f1img.header.stamp=enhanced_stamp;
                 bag_result.write("/device_0/sensor_0/Fisheye_1/image/data",f1img.header.stamp,f1img);
             }
@@ -172,19 +146,15 @@ int main(int argc, char **argv)
             if (sf1cmi != NULL) {
                 fish1cmicnt++;
                 sensor_msgs::CameraInfo f1cmi = *sf1cmi;
-                ros::Time enhanced_stamp(98,25462);
-                enhanced_stamp.sec+=sf1cmi->header.stamp.sec;
-                enhanced_stamp.nsec=sf1cmi->header.stamp.nsec;
+                ros::Time enhanced_stamp(sf1cmi->header.stamp.toSec()+98.25462);
                 f1cmi.header.stamp=enhanced_stamp;
-                bag_result.write("/device_0/sensor_0/Fisheye_1/info/camera_info",f1cmi.header.stamp,f1cmi);
+                //bag_result.write("/device_0/sensor_0/Fisheye_1/info/camera_info",f1cmi.header.stamp,f1cmi);
             }
             sensor_msgs::Imu::ConstPtr sf1acc = m.instantiate<sensor_msgs::Imu>();
             if (sf1acc != NULL) {
                 t265acccnt++;
                 sensor_msgs::Imu f1acc = *sf1acc;
-                ros::Time enhanced_stamp(98,25462);
-                enhanced_stamp.sec+=sf1acc->header.stamp.sec;
-                enhanced_stamp.nsec=sf1acc->header.stamp.nsec;
+                ros::Time enhanced_stamp(sf1acc->header.stamp.toSec()+98.25462);
                 f1acc.header.stamp=enhanced_stamp;
                 bag_result.write("/device_0/sensor_0/Accel_0/imu/data",f1acc.header.stamp,f1acc);
             }
@@ -197,9 +167,7 @@ int main(int argc, char **argv)
             if (sf2image != NULL) {
                 fish2imgcnt++;
                 sensor_msgs::Image f2img = *sf2image;
-                ros::Time enhanced_stamp(98,25462);
-                enhanced_stamp.sec+=sf2image->header.stamp.sec;
-                enhanced_stamp.nsec=sf2image->header.stamp.nsec;
+                ros::Time enhanced_stamp(sf2image->header.stamp.toSec()+98.25462);
                 f2img.header.stamp=enhanced_stamp;
                 bag_result.write("/device_0/sensor_0/Fisheye_2/image/data",f2img.header.stamp,f2img);
             }
@@ -207,19 +175,15 @@ int main(int argc, char **argv)
             if (sf2cmi != NULL) {
                 fish2cmicnt++;
                 sensor_msgs::CameraInfo f2cmi = *sf2cmi;
-                ros::Time enhanced_stamp(98,25462);
-                enhanced_stamp.sec+=sf2cmi->header.stamp.sec;
-                enhanced_stamp.nsec=sf2cmi->header.stamp.nsec;
+                ros::Time enhanced_stamp(sf2cmi->header.stamp.toSec()+98.25462);
                 f2cmi.header.stamp=enhanced_stamp;
-                bag_result.write("/device_0/sensor_0/Fisheye_2/info/camera_info",f2cmi.header.stamp,f2cmi);
+               // bag_result.write("/device_0/sensor_0/Fisheye_2/info/camera_info",f2cmi.header.stamp,f2cmi);
             }
             sensor_msgs::Imu::ConstPtr sf2gyr = m.instantiate<sensor_msgs::Imu>();
             if (sf2gyr != NULL) {
                 t265gyrcnt++;
                 sensor_msgs::Imu f2gyr = *sf2gyr;
-                ros::Time enhanced_stamp(98,25462);
-                enhanced_stamp.sec+=sf2gyr->header.stamp.sec;
-                enhanced_stamp.nsec=sf2gyr->header.stamp.nsec;
+                ros::Time enhanced_stamp(sf2gyr->header.stamp.toSec()+98.25462);
                 f2gyr.header.stamp=enhanced_stamp;
                 bag_result.write("/device_0/sensor_0/Gyro_0/imu/data",f2gyr.header.stamp,f2gyr);
             }
