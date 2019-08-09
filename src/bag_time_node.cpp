@@ -33,23 +33,26 @@ int main(int argc, char **argv)
 
     rosbag::Bag bag1;//robot
     rosbag::Bag bag2;//robot
-    rosbag::Bag bag3;//d435
+    rosbag::Bag bag3;//d435 depth
     rosbag::Bag bag4;//t265
     rosbag::Bag bag5;//d435 blur
     rosbag::Bag bag6;//t265 blur
+    rosbag::Bag bag7;//d435 imu
     rosbag::Bag bag_result;
     bag1.open("/media/ethan/LENOVO_USB_HDD/Dataset_drf/713bagrobot/2019-7-13-16-51-27_0.bag", rosbag::bagmode::Read);
     cout<<"bag1 opened"<<endl;
     bag2.open("/media/ethan/LENOVO_USB_HDD/Dataset_drf/713bagrobot/2019-7-13-16-51-27_1.bag", rosbag::bagmode::Read);
     cout<<"bag2 opened"<<endl;
-    bag3.open("/media/ethan/LENOVO_USB_HDD/Dataset_drf/713bagcamera/3d/record-d400_3-filtered_exceptrgb.bag", rosbag::bagmode::Read);
-    cout<<"d400_exceptrgb.bag opened"<<endl;
+    bag3.open("/media/ethan/LENOVO_USB_HDD/Dataset_drf/713bagcamera/3d/record-d400_3-filtered_depth.bag", rosbag::bagmode::Read);
+    cout<<"d400_depth.bag opened"<<endl;
     bag4.open("/media/ethan/LENOVO_USB_HDD/Dataset_drf/713bagcamera/3t/record-t265-3-filtered_exceptimg.bag", rosbag::bagmode::Read);
     cout<<"t265_exceptimg.bag opened"<<endl;
     bag5.open("/media/ethan/LENOVO_USB_HDD/Dataset_drf/713bagcamera/3d/record-d400_3-filtered-face-blur.bag", rosbag::bagmode::Read);
     cout<<"d400 faceblur opened"<<endl;
     bag6.open("/media/ethan/LENOVO_USB_HDD/Dataset_drf/713bagcamera/3t/record-t265-3-face-blur.bag", rosbag::bagmode::Read);
     cout<<"t265 faceblur opened"<<endl;
+    bag7.open("/home/ethan/Documents/Gaussian_src/intel_d435/record/data-collection-config/2019-07-30-11-19-21.bag",rosbag::bagmode::Read);
+    cout<<"imu_bag opened"<<endl;
     bag_result.open("/media/ethan/LENOVO_USB_HDD/Dataset_drf/result/713result.bag", rosbag::bagmode::Write);
     //robot
     std::vector<std::string> topics;
@@ -59,11 +62,10 @@ int main(int argc, char **argv)
     topics.push_back(std::string("/rslidar_packets"));int rslidarcnt=0;
     //d435 1
     std::vector<std::string> topics2;
-    topics2.push_back(std::string("/device_0/sensor_2/Accel_0/imu/data"));int d435acccnt=0;
+    topics2.push_back(std::string("/d400/imu"));int d435imucnt=0;
     //d435 2
     std::vector<std::string> topics3;
     topics3.push_back(std::string("/device_0/sensor_0/Depth_0/image/data"));int d435depthcnt=0;
-    topics3.push_back(std::string("/device_0/sensor_2/Gyro_0/imu/data"));int d435gyrcnt=0;
     //t265 1
     std::vector<std::string> topics4;
     topics4.push_back(std::string("/device_0/sensor_0/Fisheye_1/info/camera_info")); int fish1cmicnt=0;
@@ -85,38 +87,48 @@ int main(int argc, char **argv)
     //robot
     rosbag::View view(bag1, rosbag::TopicQuery(topics));
     view.addQuery(bag2,rosbag::TopicQuery(topics));
-    view.addQuery(bag3,rosbag::TopicQuery(topics2));
+    view.addQuery(bag7,rosbag::TopicQuery(topics2));
     foreach(rosbag::MessageInstance const m, view)
     {
         geometry_msgs::PoseWithCovarianceStamped::ConstPtr spose = m.instantiate<geometry_msgs::PoseWithCovarianceStamped>();
         if (spose != NULL)
         {
-            posecnt++;
-            geometry_msgs::PoseWithCovarianceStamped pose=*spose;
-            bag_result.write("/v5_current_pose",pose.header.stamp,pose);
+            if(spose->header.stamp.toSec()>1563007905.953579&&spose->header.stamp.toSec()<1563008212.244068)
+            {
+                posecnt++;
+                geometry_msgs::PoseWithCovarianceStamped pose=*spose;
+                bag_result.write("/v5_current_pose",pose.header.stamp,pose);
+            }
         }
         tf2_msgs::TFMessage::ConstPtr stf = m.instantiate<tf2_msgs::TFMessage>();
         if (stf != NULL)
         {
-            tfcnt++;
-            tf2_msgs::TFMessage tf=*stf;
-            bag_result.write("/tf",tf.transforms[0].header.stamp,tf);
+            if(stf->transforms[0].header.stamp.toSec()>1563007905.953579&&stf->transforms[0].header.stamp.toSec()<1563008212.244068)
+            {
+                tfcnt++;
+                tf2_msgs::TFMessage tf=*stf;
+                bag_result.write("/tf",tf.transforms[0].header.stamp,tf);
+            }
         }
         nav_msgs::Odometry::ConstPtr sodom = m.instantiate<nav_msgs::Odometry>();
         if (sodom != NULL)
         {
-            odomcnt++;
-            nav_msgs::Odometry odom=*sodom;
-            bag_result.write("/odom",odom.header.stamp,odom);
+            if (sodom->header.stamp.toSec() > 1563007905.953579 && sodom->header.stamp.toSec() < 1563008212.244068) {
+                odomcnt++;
+                nav_msgs::Odometry odom = *sodom;
+                bag_result.write("/odom", odom.header.stamp, odom);
+            }
         }
         sensor_msgs::Imu::ConstPtr simu = m.instantiate<sensor_msgs::Imu>();
         if (simu != NULL)
         {
-            d435acccnt++;
-            sensor_msgs::Imu imu=*simu;
-            ros::Time enhanced_stamp(simu->header.stamp.toSec()+97.9769);
-            imu.header.stamp=enhanced_stamp;
-            bag_result.write("/device_0/sensor_2/Accel_0/imu/data",imu.header.stamp,imu);
+                sensor_msgs::Imu imu = *simu;
+                ros::Time enhanced_stamp(simu->header.stamp.toSec() - 1449167.661);
+                imu.header.stamp = enhanced_stamp;
+            if (imu.header.stamp.toSec() > 1563007905.953579 && imu.header.stamp.toSec() < 1563008212.244068) {
+                d435imucnt++;
+                bag_result.write("/d400/imu", imu.header.stamp, imu);
+            }
         }
     }
 
@@ -128,27 +140,21 @@ int main(int argc, char **argv)
             d435depthcnt++;
             sensor_msgs::Image depthimg = *sdimage;
             ros::Time enhanced_stamp(sdimage->header.stamp.toSec()+97.9769);
-            depthimg.header.stamp=enhanced_stamp;
-            for(int i=sdimage->height*5/6*sdimage->step;i<sdimage->height*sdimage->step;i++)
+            if(enhanced_stamp.toSec() > 1563007905.953579 && enhanced_stamp.toSec() < 1563008212.244068)
             {
-                depthimg.data[i]=0;
+                depthimg.header.stamp=enhanced_stamp;
+                for(int i=sdimage->height*5/6*sdimage->step;i<sdimage->height*sdimage->step;i++)
+                {
+                    depthimg.data[i]=0;
+                }
+                bag_result.write("/device_0/sensor_0/Depth_0/image/data",depthimg.header.stamp,depthimg);
             }
-            bag_result.write("/device_0/sensor_0/Depth_0/image/data",depthimg.header.stamp,depthimg);
-        }
-        sensor_msgs::Imu::ConstPtr sgyr = m.instantiate<sensor_msgs::Imu>();
-        if (sgyr != NULL) {
-            d435gyrcnt++;
-            sensor_msgs::Imu gyro = *sgyr;
-            ros::Time enhanced_stamp(sgyr->header.stamp.toSec()+97.9769);
-            gyro.header.stamp=enhanced_stamp;
-            bag_result.write("/device_0/sensor_2/Gyro_0/imu/data",gyro.header.stamp,gyro);
         }
     }
 
     rosbag::View view3(bag4, rosbag::TopicQuery(topics4));
     foreach(rosbag::MessageInstance const m, view3)
         {
-
             sensor_msgs::CameraInfo::ConstPtr sf1cmi = m.instantiate<sensor_msgs::CameraInfo>();
             if (sf1cmi != NULL) {
                 fish1cmicnt++;
@@ -162,8 +168,10 @@ int main(int argc, char **argv)
                 t265acccnt++;
                 sensor_msgs::Imu f1acc = *sf1acc;
                 ros::Time enhanced_stamp(sf1acc->header.stamp.toSec()+95.1983);
-                f1acc.header.stamp=enhanced_stamp;
-                bag_result.write("/device_0/sensor_0/Accel_0/imu/data",f1acc.header.stamp,f1acc);
+                if(enhanced_stamp.toSec()> 1563007905.953579 && enhanced_stamp.toSec() < 1563008212.244068) {
+                    f1acc.header.stamp = enhanced_stamp;
+                    bag_result.write("/device_0/sensor_0/Accel_0/imu/data", f1acc.header.stamp, f1acc);
+                }
             }
         }
 
@@ -184,11 +192,11 @@ int main(int argc, char **argv)
                 t265gyrcnt++;
                 sensor_msgs::Imu f2gyr = *sf2gyr;
                 ros::Time enhanced_stamp(sf2gyr->header.stamp.toSec()+95.1983);
-                f2gyr.header.stamp=enhanced_stamp;
-                bag_result.write("/device_0/sensor_0/Gyro_0/imu/data",f2gyr.header.stamp,f2gyr);
+                if(enhanced_stamp.toSec()> 1563007905.953579 && enhanced_stamp.toSec() < 1563008212.244068) {
+                    f2gyr.header.stamp = enhanced_stamp;
+                    bag_result.write("/device_0/sensor_0/Gyro_0/imu/data", f2gyr.header.stamp, f2gyr);
+                }
             }
-
-
         }
 
     rosbag::View view5(bag5, rosbag::TopicQuery(topics6));
@@ -201,7 +209,9 @@ int main(int argc, char **argv)
                 sensor_msgs::Image image=*simage;
                 ros::Time enhanced_stamp(simage->header.stamp.toSec()+97.9769);
                 image.header.stamp=enhanced_stamp;
-                bag_result.write("/device_0/sensor_1/Color_0/image/data",image.header.stamp,image);
+                if(enhanced_stamp.toSec()> 1563007905.953579 && enhanced_stamp.toSec() < 1563008212.244068) {
+                    bag_result.write("/device_0/sensor_1/Color_0/image/data", image.header.stamp, image);
+                }
             }
         }
 
@@ -215,7 +225,9 @@ int main(int argc, char **argv)
 
                 ros::Time enhanced_stamp(sf1image->header.stamp.toSec()+95.1983);
                 f1img.header.stamp=enhanced_stamp;
-                bag_result.write("/device_0/sensor_0/Fisheye_1/image/data",f1img.header.stamp,f1img);
+                if(enhanced_stamp.toSec()> 1563007905.953579 && enhanced_stamp.toSec() < 1563008212.244068) {
+                    bag_result.write("/device_0/sensor_0/Fisheye_1/image/data", f1img.header.stamp, f1img);
+                }
             }
         }
     rosbag::View view7(bag6, rosbag::TopicQuery(topics8));
@@ -227,7 +239,9 @@ int main(int argc, char **argv)
                 sensor_msgs::Image f2img = *sf2image;
                 ros::Time enhanced_stamp(sf2image->header.stamp.toSec()+95.1983);
                 f2img.header.stamp=enhanced_stamp;
-                bag_result.write("/device_0/sensor_0/Fisheye_2/image/data",f2img.header.stamp,f2img);
+                if(enhanced_stamp.toSec()> 1563007905.953579 && enhanced_stamp.toSec() < 1563008212.244068) {
+                    bag_result.write("/device_0/sensor_0/Fisheye_2/image/data", f2img.header.stamp, f2img);
+                }
             }
         }
 
@@ -242,9 +256,9 @@ int main(int argc, char **argv)
     cout<<"tfcnt        "<<tfcnt<<endl;
     cout<<"odomcnt      "<<odomcnt<<endl;
     cout<<"d435imgcnt   "<<d435imgcnt<<endl;
-    cout<<"d435acccnt   "<<d435acccnt<<endl;
+    cout<<"d435acccnt   "<<d435imucnt<<endl;
     cout<<"d435depthcnt "<<d435depthcnt<<endl;
-    cout<<"d435gyrcnt   "<<d435gyrcnt<<endl;
+    //cout<<"d435gyrcnt   "<<d435gyrcnt<<endl;
     cout<<"fish1imgcnt  "<<fish1imgcnt<<endl;
     cout<<"fish1cmicnt  "<<fish1cmicnt<<endl;
     cout<<"t265acccnt   "<<t265acccnt<<endl;
