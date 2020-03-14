@@ -1,7 +1,7 @@
-/home/ethan/Downloads/clion-2019.1/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/ethan/catkin_ws/src/bag_time
+/home/ethan/Downloads/clion-2019.2.5/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/ethan/catkin_ws/src/bag_time
 -- Using CATKIN_DEVEL_PREFIX: /home/ethan/catkin_ws/src/bag_time/cmake-build-debug/devel
--- Using CMAKE_PREFIX_PATH: /home/ethan/catkin_ws/devel;/opt/ros/kinetic
--- This workspace overlays: /home/ethan/catkin_ws/devel;/opt/ros/kinetic
+-- Using CMAKE_PREFIX_PATH: /home/ethan/cartographer_ws/devel_isolated/cartographer_rviz;/home/ethan/cartographer_ws/install_isolated;/home/ethan/catkin_ws/devel;/opt/ros/kinetic
+-- This workspace overlays: /home/ethan/cartographer_ws/devel_isolated/cartographer_rviz;/home/ethan/cartographer_ws/install_isolated;/home/ethan/catkin_ws/devel;/opt/ros/kinetic
 -- Using PYTHON_EXECUTABLE: /usr/bin/python
 -- Using Debian Python package layout
 -- Using empy: /usr/bin/empy
@@ -9,6 +9,8 @@
 -- Call enable_testing()
 -- Using CATKIN_TEST_RESULTS_DIR: /home/ethan/catkin_ws/src/bag_time/cmake-build-debug/test_results
 -- Found gmock sources under '/usr/src/gmock': gmock will be built
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Failed
 -- Found gtest sources under '/usr/src/gmock': gtests will be built
 -- Using Python nosetests: /usr/bin/nosetests-2.7
 -- catkin 0.7.14
