@@ -1,8 +1,0 @@
-prefix=/home/ethan/catkin_ws/src/bag_time/cmake-build-debug/devel
-
-Name: bag_time
-Description: Description of bag_time
-Version: 0.0.0
-Cflags: 
-Libs: -L/home/ethan/catkin_ws/src/bag_time/cmake-build-debug/devel/lib 
-Requires: 

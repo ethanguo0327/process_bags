@@ -1,8 +1,0 @@
-prefix=/usr/local
-
-Name: bag_time
-Description: Description of bag_time
-Version: 0.0.0
-Cflags: 
-Libs: -L/usr/local/lib 
-Requires: 
