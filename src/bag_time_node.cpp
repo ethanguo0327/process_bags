@@ -31,71 +31,50 @@ using namespace std;
 int main(int argc, char **argv)
 {
 
-    ros::init(argc, argv, "bag_time_node");
+    ros::init(argc, argv, "bag_processor_node");
     ros::NodeHandle nh_;
     rosbag::Bag bag1;//d435 depth
     rosbag::Bag bag_result;
 
-    bag1.open("/media/ethan/TOSHIBA/issues/mapping_v5/lost/PGJ-LOST/2020-8-20-20-12-24_0.bag_filtered.bag", rosbag::bagmode::Read);
+    bag1.open("/home/guo/Documents/GS/update_map/物美bag/物美超市2020-04-09/2020-4-9-11-36-18_131_2_3_4_5.bag_filtered.bag", rosbag::bagmode::Read);
     cout<<"bag opened"<<endl;
-    bag_result.open("/media/ethan/TOSHIBA/issues/mapping_v5/lost/PGJ-LOST/2020-8-20-20-12-24_0.filtered_processed.bag", rosbag::bagmode::Write);
+    bag_result.open("/home/guo/Documents/GS/update_map/物美bag/物美超市2020-04-09/2020-4-9-11-36-18_131_2_3_4_5.filtered_processed.bag", rosbag::bagmode::Write);
 
     //d435
     std::vector<std::string> topics;
-    topics.push_back(std::string("/scan"));int scancnt=0;
-    topics.push_back(std::string("/odom"));int odomcnt=0;
-    topics.push_back(std::string("/tf"));int tfcnt=0;
+    topics.push_back(std::string("/v5_current_pose"));int posecnt=0;
 
-  cout<<"reading and writing...."<<endl;
+
+    cout<<"reading and writing...."<<endl;
 
     rosbag::View view(bag1, rosbag::TopicQuery(topics));
     int i=0;
     foreach(rosbag::MessageInstance const m, view)
     {
-        if(m.getTopic()=="/scan"){
-            sensor_msgs::LaserScanConstPtr scanptr = m.instantiate<sensor_msgs::LaserScan>();
+        if(m.getTopic()=="/v5_current_pose"){
+            geometry_msgs::PoseWithCovarianceStampedConstPtr poseptr = m.instantiate<geometry_msgs::PoseWithCovarianceStamped>();
             ros::Time bag_time = m.getTime();
-            if (bag_time.toSec() > 1597925606.6 && bag_time.toSec() < 1597925608.6){
-              std::cout<<"ignore 2"<<std::endl;
-            }else if(bag_time.toSec() > 1597925587.6 && bag_time.toSec() < 1597925589.6){
-              std::cout<<"ignore 1"<<std::endl;
+            if ( 710679 < poseptr->header.seq && poseptr->header.seq < 710779){
+                posecnt++;
+                geometry_msgs::PoseWithCovarianceStamped pose = *poseptr;
+                geometry_msgs::PoseWithCovarianceStamped pose_origin = *poseptr;
+                pose.pose.pose.position.x+=0.01*(poseptr->header.seq-710679);
+                pose.pose.pose.position.y-=0.01*(poseptr->header.seq-710679);
+                bag_result.write("/v5_current_pose",bag_time,pose_origin);
+                bag_result.write("/pose0",bag_time,pose);
             }else{
-              if (scanptr != NULL) {
-                scancnt++;
-                sensor_msgs::LaserScan scan = *scanptr;
-//                double new_timestamp = odom.header.stamp.toSec();
-//                odom.header.stamp.sec=new_timestamp;
-                bag_result.write("/scan",bag_time,scan);
+              if (poseptr != NULL) {
+                posecnt++;
+                geometry_msgs::PoseWithCovarianceStamped pose = *poseptr;
+                bag_result.write("/v5_current_pose",bag_time,pose);
+                bag_result.write("/pose0",bag_time,pose);
               }
             }
         }
-        if(m.getTopic()=="/odom") {
-          nav_msgs::OdometryConstPtr odomptr = m.instantiate<nav_msgs::Odometry>();
-          ros::Time bag_time = m.getTime();
-          if (odomptr != NULL) {
-            odomcnt++;
-            nav_msgs::Odometry odom = *odomptr;
-            bag_result.write("/odom", bag_time, odom);
-          }
-        }
-          if (m.getTopic() == "/tf") {
-            tf2_msgs::TFMessageConstPtr tfptr = m.instantiate<tf2_msgs::TFMessage>();
-            if (tfptr != NULL) {
-              if (tfptr->transforms[0].header.frame_id == "base_odom") {
-                tfcnt++;
-                ros::Time bag_time = m.getTime();
-                tf2_msgs::TFMessage tf2msg = *tfptr;
-                double new_timestamp = tfptr->transforms[0].header.stamp.toSec() - 62.68;
-                tf2msg.transforms[0].header.stamp.sec = new_timestamp;
-                bag_result.write("/tf", bag_time, tf2msg);
-
-              }
-            }
-          }
     }
     bag1.close();
     bag_result.close();
-    cout<<"scancnt "<<scancnt<<endl;
+    cout<<"posecnt "<< posecnt <<endl;
     cout<<"==========depth writing done!============="<<endl;
 
     return 0;
