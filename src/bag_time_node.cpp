@@ -36,9 +36,9 @@ int main(int argc, char **argv)
     rosbag::Bag bag1;//d435 depth
     rosbag::Bag bag_result;
 
-    bag1.open("/home/guo/Documents/毕业论文/traj3.bag", rosbag::bagmode::Read);
+    bag1.open("/home/guo/Documents/毕业论文/traj2.bag", rosbag::bagmode::Read);
     cout<<"bag opened"<<endl;
-    bag_result.open("/home/guo/Documents/毕业论文/traj3_processed.bag", rosbag::bagmode::Write);
+    bag_result.open("/home/guo/Documents/毕业论文/traj2_processed.bag", rosbag::bagmode::Write);
 
     //d435
     std::vector<std::string> topics;
@@ -54,11 +54,11 @@ int main(int argc, char **argv)
         if(m.getTopic()=="/odom"){
             nav_msgs::OdometryConstPtr poseptr = m.instantiate<nav_msgs::Odometry>();
             ros::Time bag_time = m.getTime();
-            if (98937 < poseptr->header.seq && poseptr->header.seq < 99100){
+            if (82045 < poseptr->header.seq && poseptr->header.seq < 82090){
                 posecnt++;
                 nav_msgs::Odometry pose = *poseptr;
                 nav_msgs::Odometry pose_origin = *poseptr;
-                pose.pose.pose.position.x += 40 + 0.1;//0.002*(poseptr->header.seq-34899) + 
+                pose.pose.pose.position.x += 40 + 0.0009*(poseptr->header.seq-82045);
                 // pose.pose.pose.position.y -= 0.2;//*(poseptr->header.seq-34899);
                 pose_origin.pose.pose.position.x += 40;
                 bag_result.write("map6",bag_time,pose_origin);
