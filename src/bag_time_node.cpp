@@ -36,13 +36,13 @@ int main(int argc, char **argv)
     rosbag::Bag bag1;//d435 depth
     rosbag::Bag bag_result;
 
-    bag1.open("/home/guo/Documents/GS/update_map/物美bag/物美超市2020-04-09/2020-4-9-11-36-18_131_2_3_4_5.bag_filtered.bag", rosbag::bagmode::Read);
+    bag1.open("/home/guo/Documents/毕业论文/traj1.bag", rosbag::bagmode::Read);
     cout<<"bag opened"<<endl;
-    bag_result.open("/home/guo/Documents/GS/update_map/物美bag/物美超市2020-04-09/2020-4-9-11-36-18_131_2_3_4_5.filtered_processed.bag", rosbag::bagmode::Write);
+    bag_result.open("/home/guo/Documents/毕业论文/traj1_processed.bag", rosbag::bagmode::Write);
 
     //d435
     std::vector<std::string> topics;
-    topics.push_back(std::string("/v5_current_pose"));int posecnt=0;
+    topics.push_back(std::string("/odom"));int posecnt=0;
 
 
     cout<<"reading and writing...."<<endl;
@@ -51,23 +51,25 @@ int main(int argc, char **argv)
     int i=0;
     foreach(rosbag::MessageInstance const m, view)
     {
-        if(m.getTopic()=="/v5_current_pose"){
-            geometry_msgs::PoseWithCovarianceStampedConstPtr poseptr = m.instantiate<geometry_msgs::PoseWithCovarianceStamped>();
+        if(m.getTopic()=="/odom"){
+            nav_msgs::OdometryConstPtr poseptr = m.instantiate<nav_msgs::Odometry>();
             ros::Time bag_time = m.getTime();
-            if ( 710679 < poseptr->header.seq && poseptr->header.seq < 710779){
+            if ( (34899 < poseptr->header.seq && poseptr->header.seq < 34999) || (39630 < poseptr->header.seq && poseptr->header.seq < 39710)){
                 posecnt++;
-                geometry_msgs::PoseWithCovarianceStamped pose = *poseptr;
-                geometry_msgs::PoseWithCovarianceStamped pose_origin = *poseptr;
-                pose.pose.pose.position.x+=0.01*(poseptr->header.seq-710679);
-                pose.pose.pose.position.y-=0.01*(poseptr->header.seq-710679);
-                bag_result.write("/v5_current_pose",bag_time,pose_origin);
-                bag_result.write("/pose0",bag_time,pose);
+                nav_msgs::Odometry pose = *poseptr;
+                nav_msgs::Odometry pose_origin = *poseptr;
+                pose.pose.pose.position.x += 40;//0.002*(poseptr->header.seq-34899) + 
+                pose.pose.pose.position.y -= 0.2;//*(poseptr->header.seq-34899);
+                pose_origin.pose.pose.position.x += 40;
+                bag_result.write("map6",bag_time,pose_origin);
+                bag_result.write("map5",bag_time,pose);
             }else{
               if (poseptr != NULL) {
                 posecnt++;
-                geometry_msgs::PoseWithCovarianceStamped pose = *poseptr;
-                bag_result.write("/v5_current_pose",bag_time,pose);
-                bag_result.write("/pose0",bag_time,pose);
+                nav_msgs::Odometry pose = *poseptr;
+                pose.pose.pose.position.x += 40;
+                bag_result.write("map6",bag_time,pose);
+                bag_result.write("map5",bag_time,pose);
               }
             }
         }
